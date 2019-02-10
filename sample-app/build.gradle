@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName project.version
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    // https://qiita.com/mfks17/items/718bfb21b69d062fd8bf
+    flavorDimensions "environment"
+
+    productFlavors {
+        free {
+            applicationId 'com.dicedmelon.example.android.free'
+            dimension "environment"
+        }
+        paid {
+            applicationId 'com.dicedmelon.example.android'
+            dimension "environment"
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+            testCoverageEnabled true
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    testImplementation 'org.assertj:assertj-core:1.7.1'
+    testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+}

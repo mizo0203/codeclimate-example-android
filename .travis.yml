@@ -1,0 +1,39 @@
+language: android
+# https://docs.travis-ci.com/user/caching/
+# https://docs.travis-ci.com/user/languages/android/#caching
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+jdk: oraclejdk8
+env:
+  global:
+    - ANDROID_TARGET=android-22
+    - ANDROID_ABI=armeabi-v7a
+android:
+  components:
+  - tools
+  - platform-tools
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - $ANDROID_TARGET
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+before_install:
+  # https://github.com/travis-ci/travis-ci/issues/8874#issuecomment-350350607
+  - yes | sdkmanager "platforms;android-27"
+script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - ./gradlew connectedCheck
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+notifications:
+  slack: mizo0203:4uNIcz2s88PfBc93CdlNRo8O
