@@ -41,12 +41,12 @@ after_script:
   # Pipe the coverage data to Code Climate
   - mkdir coverage
   - cd sample-app/src/main/java
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestFreeDebugUnitTestReport.json ../../../build/reports/jacoco/jacocoTestFreeDebugUnitTestReport/jacocoTestFreeDebugUnitTestReport.xml
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestPaidDebugUnitTestReport.json ../../../build/reports/jacoco/jacocoTestPaidDebugUnitTestReport/jacocoTestPaidDebugUnitTestReport.xml
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestPaidReleaseUnitTestReport.json ../../../build/reports/jacoco/jacocoTestPaidReleaseUnitTestReport/jacocoTestPaidReleaseUnitTestReport.xml
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestFreeReleaseUnitTestReport.json ../../../build/reports/jacoco/jacocoTestFreeReleaseUnitTestReport/jacocoTestFreeReleaseUnitTestReport.xml
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.paid.debug.json ../../../build/reports/coverage/paid/debug/report.xml
-  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.free.debug.json ../../../build/reports/coverage/free/debug/report.xml
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestFreeDebugUnitTestReport.json ../../../build/reports/jacoco/jacocoTestFreeDebugUnitTestReport/jacocoTestFreeDebugUnitTestReport.xml --prefix sample-app/src/androidTest/java/
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestPaidDebugUnitTestReport.json ../../../build/reports/jacoco/jacocoTestPaidDebugUnitTestReport/jacocoTestPaidDebugUnitTestReport.xml --prefix sample-app/src/androidTest/java/
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestPaidReleaseUnitTestReport.json ../../../build/reports/jacoco/jacocoTestPaidReleaseUnitTestReport/jacocoTestPaidReleaseUnitTestReport.xml --prefix sample-app/src/androidTest/java/
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.jacocoTestFreeReleaseUnitTestReport.json ../../../build/reports/jacoco/jacocoTestFreeReleaseUnitTestReport/jacocoTestFreeReleaseUnitTestReport.xml --prefix sample-app/src/androidTest/java/
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.paid.debug.json ../../../build/reports/coverage/paid/debug/report.xml --prefix sample-app/src/androidTest/java/
+  - ../../../../cc-test-reporter format-coverage -t jacoco -o ../../../../coverage/codeclimate.free.debug.json ../../../build/reports/coverage/free/debug/report.xml --prefix sample-app/src/androidTest/java/
   - cd ../../../../
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 6                  # Sum both coverage parts into coverage/codeclimate.json
   - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi  # Upload coverage/codeclimate.json
