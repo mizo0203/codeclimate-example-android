@@ -1,4 +1,4 @@
-# Code Climate Quality Android Example
+# [Code Climate Quality](https://codeclimate.com/quality/) Android Example
 
 [![Build Status](https://travis-ci.com/mizo0203/codeclimate-example-android.svg?branch=master)](https://travis-ci.com/mizo0203/codeclimate-example-android)
 [![Maintainability](https://api.codeclimate.com/v1/badges/90174504d17015cd6611/maintainability)](https://codeclimate.com/github/mizo0203/codeclimate-example-android/maintainability)
@@ -6,8 +6,7 @@
 
 Android code coverage example with https://codeclimate.com/quality/
 
-## 法的表示 / Legal notices
-Copyright 2019 Satoki Mizoguchi
+## オープンソースライセンス / Open source licenses
 
 This software includes open source software:
 
